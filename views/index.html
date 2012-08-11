@@ -1,0 +1,24 @@
+
+<div id="center_left_article">
+    <?js for(var key in $.coll.articles){ item = $.coll.articles[key];?>
+    <dl>
+        <dt>
+        <span class="center_left_article_title"><a href="/article/<?js=item._id?>/"><?js=item.title?></a></span>
+        <span class="center_left_article_info"><?js=$.fun.timeToString(item.last_update,'yyyy-MM-dd hh:mm')?></span>
+        </dt>
+        <dd class="center_left_article_content">
+            <?js=$.fun.subStringHtml($.fun.stripHtmlTag(item.content,true),300,'&nbsp;<a href="/article/' + item._id + '/">more>></a>')?>
+        </dd>
+        <dd class="center_left_article_bottom">
+            分类：<a href="/articles/<?js=item.cls_name?>/"><?js=item.cls_name?></a>，
+            <!--a href="#">评论(0)</a-->
+            浏览(<?js=item.clk_times?>)
+            <a href="/article/<?js=item._id?>/" class="lan1">查看全文</a>
+        </dd>
+    </dl>
+    <?js } ?>
+    <div id="center_left_article_more"> 
+        <a href="/articles/全部/" class="font16">More&nbsp;&gt;&gt;&gt;</a> 
+    </div>
+    <div class="fenge2"></div> 
+</div>

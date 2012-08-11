@@ -1,0 +1,12 @@
+{
+    "name": "bink2"
+  , "version": "0.0.1"
+  , "private": true
+  , "dependencies": {
+      "express": "2.5.5"
+    , "mongodb": ">= 0.9.6"
+    , "memcache": "> 0.0.1"
+    , "connect-redis": ">=1.0.0"
+    , "dot" : ">= 0.0.1"
+  }
+}

@@ -1,0 +1,412 @@
+/*
+    Document   : style for myself(周斌)
+    Created on : 2010-8-24, 9:52:35
+    Author     : adwards.zhou
+    Email      : adwardszhou@gmail.com
+    Description:
+        none
+*/
+
+/*
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+root {
+    display: block;
+}
+div,input,dl,dt,dd,h1,h2,h3,h4,h5,h6,a,form,li,ul {
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+    outline: none;
+}
+blockquote{
+    padding: 0px;
+    margin:0px;
+}
+img{
+    border: none;
+    margin: 0px;
+    padding: 0px;
+    display: block;
+}
+
+a{
+    color: #0000ff;
+    text-decoration:none;
+    display: inline;
+}
+a:hover{
+    text-decoration: underline;
+}
+html{
+    background-color: #fff;
+}
+body {
+    margin: 0px ;
+    padding: 0px;
+    font-size: 14px;
+    font-family: 微软雅黑 , 宋体;
+    color: #333;
+}
+.block{
+    display:block;
+}
+.inline{
+    display: inline;
+}
+.none{
+    display: none;
+}
+.float_l{
+    float:left;
+}
+.float_r{
+    float:right;
+}
+.hei1{
+    color: #333333;
+}
+.fenhong1{
+    color: #ff6666;
+}
+.hong1{
+    color: #971716;
+}
+.hong2{
+    color:red;
+}
+.hui1{
+    color:gray;
+}
+.lan1{
+    color:blue;
+}
+.f10{
+    font-size: 10px;
+}
+.f14{
+    font-size: 14px;
+}
+.f16{
+    font-size: 16px;
+}
+.f18{
+    font-size: 18px;
+}
+.f20{
+    font-size: 20px;
+}
+.f24{
+    font-size: 24px;
+}
+.bold{
+    font-weight: bold;
+}
+.heiti{
+    font-family: '黑体';
+}
+.songti{
+    font-family: '宋体';
+}
+.del{
+    text-decoration:line-through;
+}
+.over_vsb{
+    overflow: visible;
+}
+.text_left{
+    text-align: left;
+}
+.text_center{
+    text-align: center;
+}
+.text_right{
+    text-align: right;
+}
+/*roll*/
+html body {
+    _background-image:url(about:blank);
+    _background-attachment:fixed;
+}
+#roll_top {
+    position: relative;
+    cursor: pointer;
+    height: 95px;
+    width: 12px;
+}
+#roll_top {
+    background:url(/images/rollup.gif) no-repeat;
+}
+#roll {
+    display:block;
+    width:15px;
+    margin-right:-370px;  
+    position:fixed;
+    right:50%;
+    top:50%;
+    _margin-right:-235px;/*Hack IE6*/
+    _position:absolute;
+    _margin-top:300px;
+    _top:expression(eval(document.documentElement.scrollTop));
+}
+
+
+/* 页面开始 */
+.fenge1{
+    width: 20px;
+    height: 1px;
+    float: left;
+}
+.fenge2{
+    width: 1px;
+    height: 20px;
+}
+.pager{
+    height: 25px;
+    line-height: 25px;
+    float: left;
+    text-align: right;
+}
+.center_left_title{
+    width: 190px;
+    height: 25px;
+    line-height: 25px;
+    float: left;
+    padding-left: 10px;
+}
+.center_left_title_right{
+    width: 780px;
+}
+/* 首页开始 */
+#top{
+    left: 0px;/*for ie7*/
+    top:0px;
+    position:fixed !important;
+    _position:absolute;_top:expression(eval(document.documentElement.scrollTop)); /*for ie6*/
+    height: auto;
+    width: 100%;
+    margin-top: 0px;
+    background-color: #f5f5f5;
+    opacity: 0.8 !important;
+    -moz-opacity: 0.8;
+    filter:alpha(opacity=80);
+}
+#top #banner{
+    width:1250px;
+    height:80px;
+    padding: 10px 0 0 30px;
+    margin: 10px auto 0px auto;
+}
+#top #banner a:hover{
+    text-decoration:none !important;
+}
+#top #banner h1{
+    font-size: 36px;
+    font-weight: 300;
+    color: #333333;
+    text-shadow: 2px 2px 2px #aaa;
+}
+#top #banner h1 sub{
+    font-size: 14px;
+    color:#999;
+    text-shadow: none;
+}
+#top #menu{
+    font-size: 14px;
+    background-color: #333;
+}
+#top #menu ul{
+    width:1250px;
+    margin: 0px auto;
+}
+#top #menu ul li{
+    height: 40px;
+    width: 80px;
+    text-align: center;
+    line-height: 40px;
+    display: inline;
+    float: left;
+}
+#top #menu ul li a{
+    height: 40px;
+    width: 80px;
+    display: block;
+    color: white;
+}
+#top #menu ul li a:hover,#top #menu ul li a.menu_current{
+    background-color: #666;
+}
+#center{
+    width: 1250px;
+    min-height: 500px;
+    margin: 0px auto 0px auto;
+    padding-top: 150px;
+}
+#center_left{
+    width: 980px;
+    min-height: 1px;
+    float: left;
+}
+#center_left_article{
+
+}
+#center_left_article_more{
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+}
+#center_left_article_reply{
+    padding: 10px 0;
+}
+.center_left_article_title{
+    font-size: 18px;
+    font-weight: bold;
+    display: block;
+}
+.center_left_article_title a{
+    color: #0066ff;
+}
+.center_left_article_title a:hover{
+
+}
+.center_left_article_info{
+    margin-top: 5px;
+}
+
+#center_left_article dl{
+    padding: 10px 0px;
+    border-bottom: 1px dotted #ccc;
+}
+#center_left_article dl dt{
+
+}
+dd.center_left_article_content{
+    font-size: 14px;
+    margin-top: 10px;
+    line-height: 25px;
+}
+dd.center_left_article_bottom{
+    color:#666;
+    border-left: 5px solid #ccc;
+    padding-left: 5px;
+    margin-top: 10px;
+}
+dd.center_left_article_bottom a{
+    color:#666;
+}
+#center_right{
+
+    width: 250px;
+    float: left;
+}
+#center_right .side_bar_item{
+    width: 250px;
+    min-height: 1px;
+}
+.center_right_title{
+    height: 30px;
+    line-height: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    padding-left: 10px;
+    color: #fff;
+    background-color: #666;
+}
+#center_right_person{
+    font-size: 12px;
+}
+.center_right_content{
+    padding-top: 10px;
+}
+ul#center_right_content_category li{
+    width: 122px;
+    height: 25px;
+    line-height: 25px;
+    float: left;
+}
+#center_right_person .center_right_content img{
+    float: left;
+    border: 1px solid #666;
+    padding: 1px;
+}
+#center_right_person .center_right_content ul{
+    float: left;
+    display: inline;
+    width: 140px;
+    margin-left: 6px;
+}
+#center_right_person .center_right_content ul li{
+    padding: 2px 0px;
+}
+#bottom {
+    width: 1250px;
+    margin: 10px auto 0px auto;
+}
+#bottom #copyright{
+    text-align: center;
+    font-size: 14px;
+}
+#bottom #validate{
+    text-align: center;
+    margin-top: 10px;
+}
+#bottom #validate img{
+    display: inline;
+}
+#bottom #site_info{
+    text-align: center;
+    font-size: 12px;
+    margin: 10px auto;
+}
+/* 首页结束 */
+
+/* 文章开始 */
+#left_article_detail_title{
+    height: 25px;
+    line-height: 25px;
+    border-bottom: 3px #ccc solid;
+    font-size: 18px;
+    font-weight: 600;
+    color: #06F;
+    text-align: center;
+}
+#left_article_detail_subtitle{
+    text-align: center;
+    color: #666;
+}
+#left_article_detail_content{
+
+}
+#center_left_articlecls{
+    height: 620px;
+    width: 980px;
+    float: left;
+}
+
+#center_left_articlecls dt{
+    height: 30px;
+    line-height: 30px;
+    float: left;
+}
+#center_left_articlecls dd{
+    text-align: right;
+    width: 150px;
+    float: left;
+    height: 30px;
+    line-height: 30px;
+}
+dt.center_left_articlecls_class{
+    color: #333333;
+    width: 90px;
+}
+dt.center_left_articlecls_title{
+    width: 730px;
+}
+#center_left_article_reply ul li{
+    background-color: #efefef;
+}
+#center_left_article_reply ul li li{
+    background-color: #ffffff;
+}
+/* 文章结束 */

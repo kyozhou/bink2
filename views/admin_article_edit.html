@@ -1,0 +1,76 @@
+<script src="/javascripts/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="/javascripts/kindeditor/lang/zh_CN.js"></script>
+<script type="text/javascript">
+    var editor;
+    KindEditor.ready(function(K) {
+        editor = K.create('#article_content', {
+            resizeType : 1,
+            allowPreviewEmoticons : false,
+            allowImageUpload : false,
+            items : [
+                'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+        });
+    });
+    function checkArticleEditForm(){
+        if($("input[name='article[cls_name_custom]']").val() == ''
+            && $("select[name='article[cls_name]']").val() == ''){
+            alert('请输入/选择文章类型');
+            return false;
+        }
+        return true;
+    }
+</script>
+
+<div id="center_left_article">
+    <form action="/admin/save_article/" method="post">
+        <input id="article__id" type="hidden" name="article[_id]" value="<?js=$.coll.article._id?>" />
+        <table width="700">
+            <tr>
+                <td>
+                    <input id="article_title" type="text" value="<?js=$.coll.article.title?>"
+                           name="article[title]" style="width:100%"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <textarea id="article_content" name="article[content]" 
+                              style="width:100%;height:600px;visibility:hidden;"><?js=$.coll.article.content?></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <select name="article[cls_name]" id="cls_name_select" >
+                        <option value=""> -- 选择文章类型 -- </option>
+                        <?js for(var key in $.common.articleCls){ var item = $.common.articleCls[key];?>
+                        <option value="<?js=item.name?>" 
+                                <?js if(item.name == $.coll.article.cls_name){ ?>selected<?js } ?> ><?js=item.name?></option>
+                        <?js }?>
+                    </select>
+                    <span> 或 </span>
+                    <input type="text" value="" name="article[cls_name_custom]" size="10"
+                           onblur="if(this.value==''){$('#cls_name_select').attr('disabled',false)}else{$('#cls_name_select').attr('disabled',true)}"/>
+                    &VerticalBar;
+                    显示：<input type="radio" value="Y" name="article[is_show]" <?js if('Y' == $.coll.article.is_show){ ?>checked<?js } ?>/>Y
+                    <input type="radio" value="N" name="article[is_show]" <?js if('N' == $.coll.article.is_show){ ?>checked<?js } ?>/>N
+                    &VerticalBar;
+                    优先级：<input type="text" value="<?js=$.coll.article.indexnum?>" name="article[indexnum]" size="5"/>
+                    &VerticalBar;
+                    作者：<input type="text" value="<?js=$.coll.article.author?>" name="article[author]" size="5"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Save" onclick="return checkArticleEditForm()"/>
+                    <a href="/article/<?js=$.coll.article._id?>/" >取消编辑</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>

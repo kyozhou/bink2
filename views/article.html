@@ -1,0 +1,149 @@
+<div id="center_left_article">
+    <div>
+        <div id="left_article_detail_title"><?js=$.coll.article.title?></div>
+        <div id="left_article_detail_subtitle">
+            <?js if($.common.req.session.user != undefined){?>
+            <a href="/admin/article_edit/<?js=$.coll.article._id?>/" >编辑</a>
+            <a href="/admin/article_delete/<?js=$.coll.article._id?>/" 
+               onclick="if(!confirm('确定删除')){return false;}">删除</a>
+            <?js }?>
+            <?js=$.fun.timeToString($.coll.article.last_update,'yyyy-MM-dd hh:mm')?>
+        </div>
+        <div>
+            <?js=$.fun.html_decode($.coll.article.content)?>
+        </div>
+    </div>
+
+    <div id="center_left_article_reply">
+        
+        <script type='text/javascript' src='/javascripts/jquery.form.js'></script>
+        <link href="/stylesheets/colorbox.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript">
+            var indexArray = new Array();
+            $(function(){
+                refreshReplies();
+                $('#replyForm').ajaxForm({
+                    beforeSubmit: function(){
+                        var reply = {
+                            'author':$('input[name=\'reply[author]\']').val(),
+                            'content':$('textarea[name=\'reply[content]\']').val()
+                        }
+                        if(reply.author == '' || reply.content == ''){
+                            alert('请填写完整');
+                            return false;
+                        }
+                    },
+                    success: function(data){
+                        if(data == 'true'){
+                            refreshReplies();
+                            
+                            $.colorbox.close();
+                        }else{
+                            alert(data);
+                        }
+                    }
+                });
+            });
+            function registColorbox(){
+                $(".replyLink").colorbox({
+                    inline:true, 
+                    width:"700px",
+                    onClosed:function(){
+                        indexArray = new Array();
+                        $('#replyForm').clearForm();
+                    }
+                });
+            }
+            function refreshReplies(){
+                $.get('/article_replies/<?js=$.coll.article._id?>/',function(repliesHtmlString){
+                    if(repliesHtmlString != 'false'){
+                        $('#replyList').html(repliesHtmlString);
+                    }else{
+                        $('#replyList').html('');
+                    }
+                    registColorbox();
+                });
+            }
+            function setReplyIndex(elem){
+                var replyPathString = '';
+                if(elem != undefined){
+                    indexArray = new Array();
+                    getReplyIndex($(elem).parent().parent().parent());
+                    replyPathString = indexArray.join('|');
+                }
+                
+                $('input[name="replyIndex"]').val(replyPathString);
+            }
+            
+            function getReplyIndex(liObj){
+                indexArray.unshift(liObj.attr('index'));
+                if(liObj.parent('ul').parent('div').parent('li').length > 0)
+                {
+                    getReplyIndex(liObj.parent('ul').parent('div').parent('li'));
+                }
+            }
+            //<?js if($.common.req.session.user != undefined){?>
+            //admin
+            function deleteThisReply(elem){
+                if(confirm('是否确定删除本条及其子回复？')){
+                    setReplyIndex(elem);
+                    var replyPathString = indexArray.join('|');
+                    $.post('/admin/delete_article_reply/',
+                    {'replyIndex':replyPathString,'article_id':"<?js=$.coll.article._id?>"},
+                    function(isSuccessString){
+                        if(isSuccessString == true){
+                            refreshReplies();
+                        }
+                    });
+                }
+            }
+            //<?js }?>
+        </script>
+        <div>
+            <a class="replyLink" href="#replyForm" onclick="setReplyIndex()">我要评论</a>
+        </div>
+        <div id="replyList">
+            <img src="/images/loading.gif" style="display: inline;"/>
+
+        </div>
+        <div style="display: none;">
+            <form action="/admin/save_article_reply/" method="post" id="replyForm" >
+                <input type="hidden" value="<?js=$.coll.article._id?>" name="article_id" />
+                <input type="hidden" value="" name="replyIndex" />
+                <table>
+                    <tr>
+                        <td>
+                            称谓：
+                        </td>
+                        <td>
+                            <input type="text" size="10" maxlength="10" name="reply[author]" value="" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            评论内容：
+                        </td>
+                        <td>
+                            <textarea name="reply[content]" maxlength="100" rows="5" style="width:300px;"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="submit" value="写好了" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="roll">
+    <div title="回到顶部" id="roll_top"></div>
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function($){
+        $('#roll_top').click(function(){$('html,body').animate({scrollTop: '0px'}, 200);});
+    });
+</script>

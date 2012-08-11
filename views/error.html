@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <title>Error Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="refresh" content="3; url=<?js=$.coll.url?>" />
+        <style type="text/css">
+            #error_panel{
+                height: 100px;
+                width: 180px;
+                line-height: 100px;
+                margin: 200px auto auto auto;
+                border: 1px solid #ccc; 
+                background-color: #fefefe;
+                text-align: center;
+                
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="error_panel">
+            <?js=$.coll.message?>
+        </div>
+    </body>
+</html>

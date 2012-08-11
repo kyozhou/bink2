@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="Keywords" content="<?js=$.common.keywords?>" />
+        <meta name="Description" content="<?js=$.common.description?>" />
+        <title><?js=$.common.title?></title>
+        <script type='text/javascript' src='/javascripts/jquery.js'></script>
+        <script type='text/javascript' src='/javascripts/jquery.colorbox.js'></script>
+        <script type="text/javascript">
+            $(function(){
+                var relativeURL = location.href.replace(/http\:\/\/[^\/]+/g,'');
+                var menuItemNow = "/";
+                if($("#menu a[href='"+relativeURL+"']").length == 1){
+                    menuItemNow = relativeURL;
+                }else if(relativeURL.indexOf("/article")>=0){
+                    menuItemNow = "/articles/<?js=encodeURIComponent('全部')?>/";
+                }
+                $("#menu a[href='"+menuItemNow+"']").attr('class','menu_current');
+            });
+            
+        </script>
+        <link href="/stylesheets/style.css" rel="stylesheet" type="text/css" />
+        <link rel="shortcut icon" href="/oldzhou.ico" />
+
+    </head>
+    <body>
+        <div id="top">
+            <div id="banner">
+                <a href="/"><h1>周斌的博客<sub>kyozhou.com</sub></h1></a>
+                <div>PHP MySQL NoSQL CSS Javascript HTML &amp; The Other Technologies</div>
+            </div>
+            <div id="menu">
+                <ul>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/articles/<?js=encodeURIComponent('全部')?>/">文章</a></li>
+                    <li><a href="/article/4f69e7107442130bb05838cc/">Zerver2</a></li>
+                    <?js if($.common.req.session.user != undefined){?>
+                    <li><a href="/admin/article_add/">新文章</a></li>
+                    <?js }?>
+                </ul>
+            </div>
+        </div>
+
+        <div id="center">
+            <div id="center_left">
+
+                <?js=$.body?>
+
+            </div>
+            <div class="fenge1"></div>
+            <div id="center_right">
+                <div>
+                    <div class="center_right_title">分类</div>
+                    <div class="center_right_content">
+                        <ul id="center_right_content_category">
+                            <?js for(var key in $.common.articleCls){ var item = $.common.articleCls[key];?>
+                            <li>
+                                <a href="/articles/<?js=encodeURIComponent(item.name)?>/" class=""><?js=item.name?></a>
+                                <?js if($.common.req.session.user != undefined){?>
+                                <a href="/admin/delete_configs/<?js=item._id?>/" style="text-decoration: none;"
+                                   onclick="if(!confirm('确定删除此文章类型（不会同时删除文章）？')){return false;}">&times;</a> 
+                                <?js }?>
+                            </li>
+                            <?js }?>
+                        </ul>
+                    </div>
+                </div>
+                <div class="fenge2"></div>
+
+                <div id="center_right_person">
+                    <div class="center_right_title">关于我</div>
+                    <div class="center_right_content">
+                        <a href="javascript:;"><img src="/images/zhoubin.jpg" alt="Kyo周的照片" class="inline" /></a>
+                        <ul>
+                            <li class="bold f16">周斌</li>
+                            <li>PHP工程师</li>
+                            <li>Zerver作者</li>
+                            <li>专注于互联网开发</li>
+                            <li>QQ:561766366</li>
+                            <li>EM:kyozhou@sina.com</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="fenge2"></div>
+                <div class="side_bar_item" id="tencent_weibo">
+<!--                    <iframe frameborder="0" scrolling="no" src="http://show.v.t.qq.com/index.php?c=show&a=index&n=adwards&w=248&h=548&fl=2&l=6&o=17&co=1" width="248" height="548"></iframe>-->
+                </div>
+            </div>
+        </div>
+        <div id="bottom">
+            <div id="copyright">copyright &copy; 2011-2012 kyozhou.com&nbsp;版权所有&nbsp;&nbsp;Powered by <a title="一个我在大学时开发的小型 CMS\n之前用PHP 开发，后用nodejs+Mongodb重新开发" href="javascript:;">Bink2</a> ; </div>
+            <div id="site_info">
+                网站部署环境：Nodejs，Mongodb，ubuntu10(USA)
+                <?js if($.common.req.session.user != undefined){?>
+                <a href="/logout" >logout</a>
+                |
+                <a href="javascript:;" 
+                   onclick="if($('#changePasswordText').css('display')=='none'){$('#changePasswordText').show('fast');}else{$('#changePasswordText').hide('fast');}">change password</a>
+                <input type="password" id="changePasswordText" style="display: none;" size="10" 
+                       onkeypress="changePassword(this.value,window.event)" />
+                <script type="text/javascript">
+                    function changePassword(password, e){
+                        if(e.which==13){
+                            $.post('/admin/change_password/',{'password':password},function(data){
+                                if(data == 'true'){
+                                    alert('密码修改成功，确认后重新登录');
+                                    window.location.href='/woyaodenglua';
+                                }else{
+                                    alert('密码修改错误');
+                                }
+                            });
+                        }
+                    }
+                </script>
+                <?js }?>
+            </div>
+            <div class="none">
+                <script type="text/javascript">
+        
+                    var _gaq = _gaq || [];
+                    _gaq.push(['_setAccount', 'UA-24046540-1']);
+                    _gaq.push(['_setDomainName', '.kyozhou.com']);
+                    _gaq.push(['_trackPageview']);
+        
+                    (function() {
+                        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                    })();
+        
+                </script>
+                <script type="text/javascript">
+                    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+                    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fa167acc3bb411f815b955ffab9bb21a2' type='text/javascript'%3E%3C/script%3E"));
+                </script>
+            </div
+        </div>
+        
+        
+    </body>
+</html>

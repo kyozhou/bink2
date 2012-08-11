@@ -1,0 +1,22 @@
+<div class="center_left_title"><a href="/articles/全部/" class="f18 hui1">文章列表</a></div>
+<div class="center_left_title_right pager f16">
+    <?js if($.coll.page.pageIndex>1){?><a href="/articles/<?js=$.common.req.param('name')?>/1/">首页</a><?js }else{?>首页<?js}?>
+    <?js if($.coll.page.pageIndex>1){?><a href="/articles/<?js=$.common.req.param('name')?>/<?js=$.coll.page.pagePre?>/">上一页</a><?js }else{?>上一页<?js}?>
+    <?js if($.coll.page.pageIndex<$.coll.page.pageCount){?><a href="/articles/<?js=$.common.req.param('name')?>/<?js=$.coll.page.pageNext?>/">下一页</a><?js }else{?>下一页<?js}?>
+    <?js if($.coll.page.pageIndex<$.coll.page.pageCount){?><a href="/articles/<?js=$.common.req.param('name')?>/<?js=$.coll.page.pageCount?>/">尾页</a><?js }else{?>尾页<?js}?>
+    (<?js=$.coll.page.pageIndex+'/'+$.coll.page.pageCount?>)
+</div>
+<div id="center_left_articlecls">
+    <?js for(var key in $.coll.articles){ item = $.coll.articles[key];?>
+    <dl <?js if(key%2==0){?>style="background-color:#eeeeee;"<?js }?>>
+        <dt class="center_left_articlecls_class">
+        【<a href='/articles/<?js=item.cls_name?>/'><?js=item.cls_name?></a>】
+        </dt>
+        <dt class="center_left_articlecls_title f16">
+        <a href='/article/<?js=item._id?>/'><?js=item.title?></a>
+        </dt>
+        <dd><?js=$.fun.timeToString(item.last_update,'yyyy-MM-dd hh:mm')?></dd>
+    </dl>
+    <?js }?>
+
+</div>
